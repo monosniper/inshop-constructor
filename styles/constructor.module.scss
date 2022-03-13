@@ -1,0 +1,90 @@
+@import "vars";
+
+.constructor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  &__step {
+    font-weight: 400;
+    font-size: 18px;
+    color: #828282;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: .5rem;
+  }
+
+  &__title {
+    font-weight: 400;
+    font-size: 36px;
+    color: $blue;
+    margin-bottom: 2rem;
+  }
+
+  &__field {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 12px 35px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    margin-bottom: 1rem;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__button {
+    background: #fff;
+    font-size: 14px;
+    border: 1px solid $blue;
+    color: $blue;
+    border-radius: 5px;
+    padding: 10px 20px;
+
+    &:hover {
+      background: #EBEBEB;
+    }
+
+    &.constructor__button_primary {
+      background: $blue;
+      color: white;
+      border: none;
+
+      &:hover {
+        opacity: .9;
+      }
+    }
+  }
+
+  &__upload {
+    border: 2px dashed #DADADA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    cursor: pointer;
+
+    p {
+      font-weight: 500;
+      font-size: 18px;
+      color: #979797;
+      margin-bottom: 0;
+    }
+  }
+
+  input[type='file'] {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    width: 1px;
+    height: 1px;
+
+    &:focus + .constructor__upload {
+      border-color: $blue;
+    }
+  }
+}
