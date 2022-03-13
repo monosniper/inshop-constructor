@@ -7,6 +7,7 @@ class Store {
     user = null;
 
     constructor() {
+        console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
         console.log(process.env.OAUTH_CLIENT_ID)
         console.log(process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID)
         console.log(process.env.NEXT_PUBLIC_VERCEL_OAUTH_CLIENT_ID)
