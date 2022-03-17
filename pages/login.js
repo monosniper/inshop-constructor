@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import OAuth2Login from "react-simple-oauth2-login";
 import randomstring from "randomstring";
 import store from "../store";
+import styles from "../styles/Login.module.scss";
 import {observer} from "mobx-react-lite";
-import Router, {useRouter} from "next/router";
+import {useRouter} from "next/router";
 
 const Login = observer(() => {
 
@@ -39,17 +40,21 @@ const Login = observer(() => {
     }, [store.user])
 
     return (
-        <div className='center'>
-            <h4>Для продолжения необходимо авторизоваться</h4>
-            <OAuth2Login
-                authorizationUrl="https://salonmono.space/oauth/authorize"
-                responseType="code"
-                clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}
-                redirectUri={process.env.NEXT_PUBLIC_OAUTH_CLIENT_REDIRECT_URI}
-                onSuccess={onSuccess}
-                onFailure={(rs) => console.log(rs)}
-                state={state}
-            />
+        <div className={styles.wrapper}>
+            <div className={styles.container}>
+                <h4 className={styles.title}>Для продолжения необходимо авторизоваться</h4>
+                <OAuth2Login
+                    authorizationUrl="https://salonmono.space/oauth/authorize"
+                    responseType="code"
+                    clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}
+                    redirectUri={process.env.NEXT_PUBLIC_OAUTH_CLIENT_REDIRECT_URI}
+                    onSuccess={onSuccess}
+                    className={styles.button + ' button'}
+                    buttonText={'Авторизация'}
+                    onFailure={(rs) => console.log(rs)}
+                    state={state}
+                />
+            </div>
         </div>
     );
 });

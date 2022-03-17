@@ -3,6 +3,8 @@ import styles from "../styles/Header.module.scss";
 import Image from "next/image";
 import store from "../store";
 import {observer} from "mobx-react-lite";
+import Dropdown from "./Dropdown";
+import Router from "next/router";
 
 const User = observer(() => {
 
@@ -17,16 +19,31 @@ const User = observer(() => {
         user && setName(user.name || user.email)
     }, [user])
 
+    const handleLogout = () => {
+        localStorage.clear()
+        Router.push('/login')
+    }
+
     return user ? (
-        <div className={styles.user}>
-            <Image
-                src={'/images/avatar.png'}
-                width={50}
-                height={50}
-                alt={name}
+            <Dropdown
+                options={[
+                    {
+                        title: 'Выйти',
+                        handle: handleLogout
+                    }
+                ]}
+                target={(
+                    <div className={styles.user}>
+                        <Image
+                            src={'/images/avatar.png'}
+                            width={50}
+                            height={50}
+                            alt={name}
+                        />
+                        <span className={styles.user__name}>{name}</span>
+                    </div>
+                )}
             />
-            <span className={styles.user__name}>{name}</span>
-        </div>
     ) : <></>;
 });
 

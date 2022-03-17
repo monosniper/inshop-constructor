@@ -4,7 +4,7 @@ import ConstructorSteps from "../components/ConstructorSteps";
 import General from "../components/steps/General";
 import Palette from "../components/steps/Palette";
 import Modules from "../components/steps/Modules";
-import Styles from "../components/steps/Styles";
+import Stylization from "../components/steps/Stylization";
 
 const Constructor = () => {
     const steps = [
@@ -22,18 +22,22 @@ const Constructor = () => {
         },
         {
             title: 'Стилизация',
-            content: <Styles/>
+            content: <Stylization/>
         }
     ]
 
     return (
         <Row className='h-100'>
-            <Col className={styles.constructor}>
-                <ConstructorSteps
-                    steps={steps}
-                />
+            <Col lg={6}>
+                <div className={styles.constructor}>
+                    <ConstructorSteps
+                        steps={steps}
+                    />
+                </div>
             </Col>
-            <Col></Col>
+            <Col>
+                dsada
+            </Col>
         </Row>
     );
 };

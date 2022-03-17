@@ -1,0 +1,26 @@
+.modules {
+  height: 53vh;
+
+  &__wrapper {
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  &__item {
+    border-radius: 20px;
+    border: 1px solid #D9D9D9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 35px;
+
+    &+.modules__item {
+      margin-top: .5rem;
+    }
+  }
+
+  &__name {
+    font-weight: 400;
+    font-size: 18px;
+  }
+}

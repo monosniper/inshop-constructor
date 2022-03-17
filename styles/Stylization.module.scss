@@ -1,0 +1,18 @@
+.stylization {
+  height: 53vh;
+
+  &__wrapper {
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  &__group {
+    border-radius: 20px;
+    border: 1px solid #D9D9D9;
+    padding: 25px 35px;
+
+    &+.stylization__group {
+      margin-top: 1rem;
+    }
+  }
+}

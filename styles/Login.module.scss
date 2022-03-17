@@ -1,0 +1,23 @@
+@import "vars";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.container {
+  text-align: center;
+}
+
+.button {
+  background: $red !important;
+  color: white;
+  font-size: 18px;
+  margin: 1rem auto;
+
+  &:hover {
+    opacity: .9;
+  }
+}

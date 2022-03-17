@@ -1,6 +1,25 @@
+@import "vars";
+@import "modal";
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+*::-webkit-scrollbar {
+  width: 3px;               /* ширина scrollbar */
+}
+*::-webkit-scrollbar-track {
+  background: transparent;        /* цвет дорожки */
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #00000042;    /* цвет плашки */
+  border-radius: 10px;       /* закругления плашки */
+  border: 1px solid transparent;  /* padding вокруг плашки */
+}
+
+.red {
+  color: $red;
 }
 
 * {
@@ -24,4 +43,19 @@ main {
   padding: 9px 20px;
   font-size: 14px;
   border-radius: 5px;
+
+  &:hover {
+    background: #EBEBEB;
+  }
+
+  &.button_primary {
+    background: $blue;
+    color: white;
+    border: none;
+
+    &:hover {
+      opacity: .9;
+    }
+  }
 }
+
