@@ -1,12 +1,16 @@
 import {Col, Row} from "react-bootstrap";
-import styles from '../styles/constructor.module.scss'
-import ConstructorSteps from "../components/ConstructorSteps";
-import General from "../components/steps/General";
-import Palette from "../components/steps/Palette";
-import Modules from "../components/steps/Modules";
-import Stylization from "../components/steps/Stylization";
+import styles from '../../styles/constructor.module.scss'
+import ConstructorSteps from "../../components/ConstructorSteps";
+import General from "../../components/steps/General";
+import Palette from "../../components/steps/Palette";
+import Modules from "../../components/steps/Modules";
+import Stylization from "../../components/steps/Stylization";
+import {useEffect} from "react";
+import shop from "../../store/shop";
+import {useRouter} from "next/router";
 
 const Constructor = () => {
+    const router = useRouter()
     const steps = [
         {
             title: 'Общие сведения',
@@ -25,6 +29,11 @@ const Constructor = () => {
             content: <Stylization/>
         }
     ]
+
+    useEffect(() => {
+        shop.setId(router.query.id)
+        shop.requestData()
+    }, [])
 
     return (
         <Row className='h-100'>

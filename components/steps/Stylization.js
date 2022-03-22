@@ -1,13 +1,14 @@
 import React from 'react';
-import store from "../../store";
 import styles from "../../styles/Stylization.module.scss";
 import StylesOption from "../StylesOption";
 import {observer} from "mobx-react-lite";
+import shop from "../../store/shop";
+import constructor from "../../store/constructor";
 
 const StylesGroup = ({group}) => {
 
     const options = group.items.map(option => {
-        option.checked = store.shop.styles[option.name]
+        option.checked = shop.getLayoutOption(option.name)
         return option;
     })
 
@@ -27,7 +28,7 @@ const Stylization = observer(() => {
     return (
         <div className={styles.stylization}>
             <div className={styles.stylization__wrapper}>
-                {store.styles.map((group, i) => <StylesGroup key={'styles-group-'+i} group={group} />)}
+                {constructor.layoutOptions.map((group, i) => <StylesGroup key={'styles-group-'+i} group={group} />)}
             </div>
         </div>
     );

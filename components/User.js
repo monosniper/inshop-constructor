@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import styles from "../styles/Header.module.scss";
 import Image from "next/image";
-import store from "../store";
+import store from "../store/store";
 import {observer} from "mobx-react-lite";
 import Dropdown from "./Dropdown";
 import Router from "next/router";
+import $routes from "../http/routes";
 
 const User = observer(() => {
 
@@ -21,7 +22,7 @@ const User = observer(() => {
 
     const handleLogout = () => {
         localStorage.clear()
-        Router.push('/login')
+        Router.push($routes.login)
     }
 
     return user ? (

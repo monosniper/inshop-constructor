@@ -4,7 +4,8 @@ import Layout from "../components/Layout";
 import {observer} from "mobx-react-lite";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import store from "../store";
+import store from "../store/store";
+import {$routes} from "../http/routes";
 
 const MyApp = observer(({ Component, pageProps }) => {
 
@@ -31,12 +32,13 @@ const MyApp = observer(({ Component, pageProps }) => {
 
     function authCheck(url) {
         // redirect to login page if accessing a private page and not logged in
-        const publicPaths = ['/login'];
+        const publicPaths = [$routes.login];
         const path = url.split('?')[0];
+        console.log(store.user)
         if (!store.user && !publicPaths.includes(path)) {
             setAuthorized(false);
             router.push({
-                pathname: '/login',
+                pathname: $routes.login,
                 query: { returnUrl: router.asPath }
             });
         } else {

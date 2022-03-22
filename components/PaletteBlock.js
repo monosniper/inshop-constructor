@@ -1,26 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import styles from "../styles/Palette.module.scss";
-import store from "../store";
 import {observer} from "mobx-react-lite";
+import shop from "../store/shop";
 
 const PaletteBlock = observer(({palette}) => {
 
+    const [isActive, setIsActive] = useState(false)
     const [itemClass, setItemClass] = useState(styles.palette__item)
 
     const handleClick = () => {
-        store.updateShopData((shop) => {
-            shop.data.palette = palette;
-            return shop;
-        })
+        shop.setPalette(palette)
     }
+    
+    useEffect(() => {
+        setIsActive(shop.isPalette(palette))
+    }, [shop.options.palette])
 
     useEffect(() => {
-        if(store.isPalette(palette)) {
-            setItemClass(styles.palette__item + ' ' + styles.active)
-        } else {
-            setItemClass(styles.palette__item)
-        }
-    }, [store.shop.data.palette])
+        setItemClass(isActive ? styles.palette__item + ' ' + styles.active : styles.palette__item)
+    }, [isActive])
 
     return (
         <div onClick={handleClick} className={itemClass}>

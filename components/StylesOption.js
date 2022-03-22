@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-import store from "../store";
 import Option from "./Option";
 import {observer} from "mobx-react-lite";
+import shop from "../store/shop";
 
 const StylesOption = observer(({title, name}) => {
-    const [checked, setChecked] = useState(store.shop.styles[name])
+    const [checked, setChecked] = useState(shop.getLayoutOption(name))
 
     const handleChange = (checked) => {
         setChecked(checked)
-        store.setStyle(name, checked)
+        shop.setLayoutOption(name, checked)
     }
 
     return <Option onChange={handleChange} title={title} checked={checked} />;

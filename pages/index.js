@@ -1,8 +1,29 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import styles from '../styles/Dashboard.module.scss'
+import {useEffect, useState} from "react";
+import store from "../store/store";
+import Shop from "../components/Shop";
 
 export default function Home() {
+
+    const [shops, setShops] = useState([])
+
+    const setShopsFromLocalStorage = () => {
+        const localStorageShops = localStorage.getItem(store.localStorage.shops);
+
+        if(localStorageShops) {
+            setShops(JSON.parse(localStorageShops))
+        }
+    }
+
+    useEffect(() => {
+        setShopsFromLocalStorage()
+
+        store.requestShops().then(() => {
+            setShopsFromLocalStorage()
+        });
+    }, [])
+
     return (
         <>
             <div className={styles.topbar}>
@@ -27,25 +48,7 @@ export default function Home() {
                 </div>
             </div>
             <div className={styles.shops}>
-                <Link href={'/constructor'}>
-                    <div className={styles.shop}>
-                        <div className={styles.shop__top}>
-                            <Image
-                                src={'/images/shop.png'}
-                                height={55}
-                                width={55}
-                                alt={'Shop name'}
-                            />
-                            <div className={styles.shop__details}>
-                                <h4 className={styles.shop__name}>Новый магазин</h4>
-                                <p className={styles.shop__domain}>shop.inshop.io</p>
-                            </div>
-                        </div>
-                        <div className={styles.shop__bottom}>
-                            <span className={styles.shop__changes}>Посл изменение: вчера</span>
-                        </div>
-                    </div>
-                </Link>
+                {shops.map((shop, i) => <Shop key={'shop-'+i} shop={shop} />)}
             </div>
         </>
     )

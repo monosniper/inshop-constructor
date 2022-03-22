@@ -1,35 +1,28 @@
-import $api from "../http";
+import {$api, $server} from "../http";
+import {$apiRoutes} from "../http/routes";
 
 export default class UserService {
-    static async fetchUsers() {
-        return $api.get('users');
+    static async requestUser() {
+        const response = await $api.get($apiRoutes.user);
+
+        return response.data;
     }
 
-    static async updateUser(data, id) {
-        return $api.post(`users/${id}/update`, data);
+    static async requestAccessToken(code) {
+        const response = await $server.post($apiRoutes.token, {
+            client_id: process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID,
+            client_secret: process.env.NEXT_PUBLIC_OAUTH_CLIENT_SECRET,
+            redirect_uri: process.env.NEXT_PUBLIC_OAUTH_CLIENT_REDIRECT_URI,
+            grant_type: 'authorization_code',
+            code
+        })
+
+        return response.data.access_token;
     }
 
-    static async updatePassword(data, id) {
-        return $api.post(`users/${id}/change-password`, data);
-    }
+    static async requestShops() {
+        const response = await $api.get($apiRoutes.shops.list);
 
-    static async setUserToPendingForVerification(user_id) {
-        return $api.get(`users/${user_id}/set-pending-for-verification`);
-    }
-
-    static async getVerificationImages(user_id) {
-        return $api.get(`users/${user_id}/verification-images`);
-    }
-
-    static async acceptUserVerification(user_id) {
-        return $api.get(`users/${user_id}/verification/accept`);
-    }
-
-    static async rejectUserVerification(user_id) {
-        return $api.get(`users/${user_id}/verification/reject`);
-    }
-
-    static async sendPay(params) {
-        return $api.post('pay-event', params);
+        return response.data;
     }
 }

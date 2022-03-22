@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import OAuth2Login from "react-simple-oauth2-login";
 import randomstring from "randomstring";
-import store from "../store";
+import store from "../store/store";
 import styles from "../styles/Login.module.scss";
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";

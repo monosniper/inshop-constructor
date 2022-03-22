@@ -5,36 +5,13 @@ import Popup from "reactjs-popup";
 import { SketchPicker } from 'react-color'
 import PaletteBlock from "../PaletteBlock";
 import {observer} from "mobx-react-lite";
-import store from "../../store";
+import shop from "../../store/shop";
+import constructor from "../../store/constructor";
 
 const Palette = observer(() => {
-
-    const [palettes, setPalettes] = useState([
-        [
-            '#9B40BF',
-            '#E195FF',
-            '#6C56F1',
-        ],
-        [
-            '#2CF0D9',
-            '#23B870',
-            '#82EEBA',
-        ],
-        [
-            '#FBC63E',
-            '#DE4F22',
-            '#FE9A7B',
-        ],
-        [
-            '#64D7FC',
-            '#3C8AFE',
-            '#8CBAFF',
-        ],
-    ]);
-
     const [ownPalette, setOwnPalette] = useState(() => {
-        if(store.shop.data.hasOwnPalette) {
-            return store.shop.data.ownPalette;
+        if(shop.options.hasOwnPalette) {
+            return shop.options.ownPalette;
         }
 
         return [
@@ -74,10 +51,7 @@ const Palette = observer(() => {
     };
 
     const handleOpen = () => {
-        store.updateShopData((shop) => {
-            shop.data.hasOwnPalette = true;
-            return shop;
-        })
+        shop.setHasOwnPalette(true)
     };
 
     const handleCancel = (close) => {
@@ -86,24 +60,24 @@ const Palette = observer(() => {
         setOwnPalette(oldOwnPalette)
     }
 
+    const handleReady = (close) => {
+        close()
+    }
+
     useEffect(() => {
-        store.updateShopData((shop) => {
-            shop.data.ownPalette = ownPalette;
+        shop.setOwnPalette(ownPalette)
 
-            if(store.isOwnPalette()) {
-                shop.data.palette = ownPalette;
-            }
-
-            return shop;
-        })
+        if(shop.isOwnPalette()) {
+            shop.setPalette(ownPalette)
+        }
     }, [ownPalette])
 
     return (
         <>
             <div className={styles.palette__wrapper}>
                 <div className={styles.palette__container}>
-                    {store.shop.data.hasOwnPalette && <PaletteBlock palette={ownPalette} />}
-                    {palettes.map((palette, i) => <PaletteBlock key={'palette-'+i} palette={palette} />)}
+                    {shop.options.hasOwnPalette && <PaletteBlock palette={ownPalette} />}
+                    {constructor.palettes.map((palette, i) => <PaletteBlock key={'palette-'+i} palette={palette} />)}
                 </div>
             </div>
 
@@ -129,7 +103,7 @@ const Palette = observer(() => {
                                 </div>
                                 <div className={styles.ownPalette__footer}>
                                     <button onClick={() => handleCancel(close)} className={'button'}>Отмена</button>
-                                    <button onClick={close} className={'button button_primary'}>Готово</button>
+                                    <button onClick={() => handleReady(close)} className={'button button_primary'}>Готово</button>
                                 </div>
                             </div>
                         )}
