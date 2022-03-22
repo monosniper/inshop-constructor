@@ -6,6 +6,7 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import "filepond/dist/filepond.min.css";
 import shop from "../../store/shop";
+import {observer} from "mobx-react-lite";
 
 const General = () => {
     const [files, setFiles] = useState([])
@@ -16,6 +17,16 @@ const General = () => {
         shop.setTitle(title)
         shop.setSlogan(slogan)
     }, [title, slogan])
+
+    useEffect(() => {
+        if(shop.options) {
+            setTitle(shop.options.title)
+            setSlogan(shop.options.slogan)
+        } else {
+            setTitle('')
+            setSlogan('')
+        }
+    }, [shop.options])
 
     registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
@@ -35,4 +46,4 @@ const General = () => {
     );
 };
 
-export default General;
+export default observer(General);

@@ -34,7 +34,7 @@ const MyApp = observer(({ Component, pageProps }) => {
         // redirect to login page if accessing a private page and not logged in
         const publicPaths = [$routes.login];
         const path = url.split('?')[0];
-        console.log(store.user)
+
         if (!store.user && !publicPaths.includes(path)) {
             setAuthorized(false);
             router.push({

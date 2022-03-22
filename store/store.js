@@ -14,6 +14,18 @@ class Store {
         makeAutoObservable(this)
     }
 
+    getShops() {
+        let shops = this.shops
+
+        if(shops) {
+            shops = [...shops.entries()].map(entry => entry[1])
+
+            return shops
+        }
+
+        return [];
+    }
+
     setUser(user) {
         this.user = user
     }
@@ -22,9 +34,14 @@ class Store {
         this.shops = shops;
     }
 
-    getShops() {
-        console.log([...this.shops.entries()])
-        return [...this.shops.entries()];
+    setShopData(id, options) {
+        const newShops = this.getShops()
+
+        newShops.map(shop => {
+            if(shop.id === id) shop.options = options;
+        })
+
+        this.shops = newShops;
     }
 
     async requestAccessToken(code) {

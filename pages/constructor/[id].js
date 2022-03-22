@@ -8,6 +8,7 @@ import Stylization from "../../components/steps/Stylization";
 import {useEffect} from "react";
 import shop from "../../store/shop";
 import {useRouter} from "next/router";
+import constructor from "../../store/constructor";
 
 const Constructor = () => {
     const router = useRouter()
@@ -32,6 +33,7 @@ const Constructor = () => {
 
     useEffect(() => {
         shop.setId(router.query.id)
+        constructor.resetSteps()
         shop.requestData()
     }, [])
 

@@ -125,8 +125,6 @@ class Constructor {
 
     constructor() {
         makeAutoObservable(this)
-
-        shop.setLayout(this.processLayout())
     }
 
     setStepsCount(stepsCount) {

@@ -1,10 +1,11 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, toJS} from "mobx";
 import ShopService from "../services/ShopService";
+import store from "./store";
+import constructor from "./constructor";
 
 class Shop {
     id = null
-    oldOptions = {}
-    options = {
+    defaultOptions = {
         title: '',
         slogan: '',
         hasOwnPalette: false,
@@ -13,13 +14,11 @@ class Shop {
         layout: {},
         modules: []
     }
+    oldOptions = this.defaultOptions
+    options = this.defaultOptions
 
     constructor() {
         makeAutoObservable(this)
-    }
-
-    setLayout(layout) {
-        this.options.layout = layout
     }
 
     setTitle(title) {
@@ -116,19 +115,35 @@ class Shop {
         this.oldOptions = options;
     }
 
-    async sendShopUpdate() {
-        console.log(this.id)
-        const status = await ShopService.sendUpdate(this.id, this.options)
+    resetOptions() {
+        this.setOldOption({...this.defaultOptions})
+        this.setOptions({...this.defaultOptions})
+    }
 
-        return status
+    async sendShopUpdate() {
+        const options = await ShopService.sendUpdate(this.id, this.options)
+
+        if(options) {
+            store.setShopData(this.id, options)
+        }
     }
 
     async requestData() {
         const response = await ShopService.requestData(this.id)
 
+        this.resetOptions()
+
         if(response.options) {
-            this.setOldOption(response.options)
-            this.setOptions(response.options)
+            this.setOldOption({...response.options})
+            this.setOptions({...response.options})
+
+            const layout = response.options.layout;
+
+            if(layout) {
+                if((Array.isArray(layout) && !layout.length) || layout.logo === undefined) {
+                    this.options.layout = constructor.processLayout()
+                }
+            }
         }
     }
 }

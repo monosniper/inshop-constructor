@@ -9,12 +9,16 @@ export default class ShopService {
     static async sendUpdate(id, options) {
         const response = await $api.put($apiRoutes.shops.update(id), options);
 
-        return this.status(response.status);
+        const status = this.status(response.status);
+
+        if(!status) return false;
+
+        return response.data.data.options;
     }
 
     static async requestData(id) {
         const response = await $api.get($apiRoutes.shops.get(id));
 
-        return response.data;
+        return response.data.data;
     }
 }

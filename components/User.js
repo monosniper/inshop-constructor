@@ -5,7 +5,7 @@ import store from "../store/store";
 import {observer} from "mobx-react-lite";
 import Dropdown from "./Dropdown";
 import Router from "next/router";
-import $routes from "../http/routes";
+import {$routes} from "../http/routes";
 
 const User = observer(() => {
 
