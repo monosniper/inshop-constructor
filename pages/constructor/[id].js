@@ -9,6 +9,7 @@ import {useEffect} from "react";
 import shop from "../../store/shop";
 import {useRouter} from "next/router";
 import constructor from "../../store/constructor";
+import Preview from "../../components/Preview";
 
 const Constructor = () => {
     const router = useRouter()
@@ -47,7 +48,7 @@ const Constructor = () => {
                 </div>
             </Col>
             <Col>
-                dsada
+                <Preview />
             </Col>
         </Row>
     );
