@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import UserService from "../services/UserService";
+import ShopService from "../services/ShopService";
 
 class Store {
     user = null;
@@ -9,6 +10,7 @@ class Store {
         shops: 'shops',
     }
     shops = []
+    activeDomain = false
 
     constructor() {
         makeAutoObservable(this)
@@ -28,6 +30,10 @@ class Store {
 
     setUser(user) {
         this.user = user
+    }
+
+    setActiveDomain(id) {
+        this.activeDomain = id
     }
 
     setShops(shops) {
@@ -68,6 +74,22 @@ class Store {
         this.setShops(shops);
 
         return shops;
+    }
+
+    async getDomains() {
+        const domains = await UserService.requestDomains();
+
+        return domains;
+    }
+
+    async registerShop(title) {
+        if(this.activeDomain) {
+            const shop = await ShopService.register(this.activeDomain, title);
+
+            this.requestShops()
+
+            return shop;
+        }
     }
 }
 

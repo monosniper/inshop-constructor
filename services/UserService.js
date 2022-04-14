@@ -25,4 +25,10 @@ export default class UserService {
 
         return response.data;
     }
+
+    static async requestDomains() {
+        const response = await $api.get($apiRoutes.domains.list);
+
+        return response.data;
+    }
 }

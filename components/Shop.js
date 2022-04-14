@@ -15,7 +15,7 @@ const Shop = ({ shop }) => {
     useEffect(() => {
         if(shop.options) {
             setTitle(shop.options.title)
-            setDomain(shop.options.domain)
+            setDomain(shop.domain)
         }
     }, [])
 

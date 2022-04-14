@@ -1,3 +1,5 @@
+@import "vars";
+
 .wrapper {
   background: #EFF0F2;
   width: 100vw;
@@ -73,5 +75,91 @@
 
   &__details {
 
+  }
+}
+
+.modal {
+  max-width: 100%;
+  width: 450px;
+  overflow: hidden;
+  margin: 0 auto;
+  background: $bg;
+  inset: 40px;
+  position: absolute;
+  padding: 40px;
+  border-radius: 10px;
+  height: fit-content;
+
+  &__title {
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+
+  &__list {
+    overflow-y: scroll;
+    max-height: 300px;
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0px;
+    background-color: #000000ab;
+  }
+
+  &__button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 15px;
+    background: $purple;
+    color: white;
+    margin-left: auto;
+    display: block;
+  }
+
+  &__link {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    padding: 1rem 0;
+  }
+
+  &__footer {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+
+    .modal__button {
+      margin: 0 !important;
+    }
+  }
+
+  &__field {
+    padding: 7px 15px;
+    width: 100%;
+    border: 1px solid #ccc;
+    outline: none;
+    margin: 1rem 0;
+  }
+}
+
+.domain {
+  padding: .5rem 1rem;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #e8e8e8;
+
+  &:hover {
+    background: #dcdcdc;
+  }
+
+  &+.domain {
+    margin-top: .5rem;
+  }
+
+  &.domain_active {
+    border: 1px solid $purple;
   }
 }

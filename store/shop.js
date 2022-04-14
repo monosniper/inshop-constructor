@@ -143,6 +143,8 @@ class Shop {
                 if((Array.isArray(layout) && !layout.length) || layout.logo === undefined) {
                     this.options.layout = constructor.processLayout()
                 }
+            } else {
+                this.options.layout = constructor.processLayout()
             }
         }
     }

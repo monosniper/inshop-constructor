@@ -21,4 +21,13 @@ export default class ShopService {
 
         return response.data.data;
     }
+
+    static async register(domain_id, title) {
+        const response = await $api.post($apiRoutes.shops.create, {
+            domain_id,
+            title
+        });
+
+        return response.data.data;
+    }
 }
