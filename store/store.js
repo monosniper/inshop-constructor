@@ -1,6 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import UserService from "../services/UserService";
 import ShopService from "../services/ShopService";
+import {defaultOptions} from "../utils/options";
 
 class Store {
     user = null;
@@ -84,7 +85,9 @@ class Store {
 
     async registerShop(title) {
         if(this.activeDomain) {
-            const shop = await ShopService.register(this.activeDomain, title);
+            let options = {...defaultOptions, title};
+            console.log(options)
+            const shop = await ShopService.register(this.activeDomain, options);
 
             this.requestShops()
 

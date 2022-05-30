@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Logo = () => {
     return (
-        <Link className={styles.logo} href={'/'}>
+        <Link className={styles.logo} href={'/'} passHref>
             <Image
                 src={'/images/logo.png'}
                 width={120}

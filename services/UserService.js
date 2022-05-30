@@ -1,5 +1,7 @@
 import {$api, $server} from "../http";
 import {$apiRoutes} from "../http/routes";
+import {showError} from "../utils/showError";
+import {$errors} from "../utils/errors";
 
 export default class UserService {
     static async requestUser() {
@@ -21,7 +23,13 @@ export default class UserService {
     }
 
     static async requestShops() {
-        const response = await $api.get($apiRoutes.shops.list);
+        let response = {data: []}
+
+        try {
+            response =  await $api.get($apiRoutes.shops.list);
+        } catch (e) {
+            showError($errors.network_error)
+        }
 
         return response.data;
     }

@@ -2,20 +2,13 @@ import {makeAutoObservable, toJS} from "mobx";
 import ShopService from "../services/ShopService";
 import store from "./store";
 import constructor from "./constructor";
+import {defaultOptions} from "../utils/options";
 
 class Shop {
     id = null
-    defaultOptions = {
-        title: '',
-        slogan: '',
-        hasOwnPalette: false,
-        ownPalette: [],
-        palette: [],
-        layout: {},
-        modules: []
-    }
-    oldOptions = this.defaultOptions
-    options = this.defaultOptions
+    oldOptions = defaultOptions
+    options = defaultOptions
+    domain = ''
 
     constructor() {
         makeAutoObservable(this)
@@ -27,6 +20,10 @@ class Shop {
 
     setSlogan(slogan) {
         this.options.slogan = slogan;
+    }
+
+    setDomain(domain) {
+        this.domain = domain;
     }
 
     getLayoutOption(name) {
@@ -133,6 +130,8 @@ class Shop {
 
         this.resetOptions()
 
+        response.domain && this.setDomain(response.domain)
+
         if(response.options) {
             this.setOldOption({...response.options})
             this.setOptions({...response.options})
@@ -146,6 +145,8 @@ class Shop {
             } else {
                 this.options.layout = constructor.processLayout()
             }
+        } else {
+            this.options.layout = constructor.processLayout()
         }
     }
 }

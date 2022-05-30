@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import store from "../store/store";
 import {$routes} from "../http/routes";
+import ErrorBoundary from "./ErrorBoundary";
 
 const MyApp = observer(({ Component, pageProps }) => {
 
@@ -47,9 +48,11 @@ const MyApp = observer(({ Component, pageProps }) => {
     }
 
     return (
-        <Layout>
-            {authorized && <Component {...pageProps} />}
-        </Layout>
+        <ErrorBoundary>
+            <Layout>
+                {authorized && <Component {...pageProps} />}
+            </Layout>
+        </ErrorBoundary>
     )
 })
 

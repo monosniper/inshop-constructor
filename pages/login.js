@@ -44,7 +44,7 @@ const Login = observer(() => {
             <div className={styles.container}>
                 <h4 className={styles.title}>Для продолжения необходимо авторизоваться</h4>
                 <OAuth2Login
-                    authorizationUrl="https://salonmono.space/oauth/authorize"
+                    authorizationUrl={process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL + "/oauth/authorize"}
                     responseType="code"
                     clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}
                     redirectUri={process.env.NEXT_PUBLIC_OAUTH_CLIENT_REDIRECT_URI}

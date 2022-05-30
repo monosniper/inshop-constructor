@@ -18,5 +18,5 @@ export const $apiRoutes = {
 }
 
 export const $serverRoutes = Object.fromEntries(Object.entries({
-    domains: '/domains',
-}).map(([key, route]) => [key, 'https://salonmono.space' + route]))
+    domains: '/domains/register',
+}).map(([key, route]) => [key, process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL + route]))
