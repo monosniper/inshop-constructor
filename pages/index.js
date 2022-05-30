@@ -153,7 +153,7 @@ export default function Home() {
 
                 <DomainsList />
 
-                <a target={"_blank"} href={$serverRoutes.domains} className={styles.modal__link}>Зарегистрировать домен</a>
+                <a target={"_blank"} rel="noreferrer" href={$serverRoutes.domains} className={styles.modal__link}>Зарегистрировать домен</a>
                 <div className={styles.modal__footer}>
                     <button onClick={handleCloseAddShopModal} className={styles.modal__button}>Отмена</button>
                     <button onClick={handleNextStep} className={styles.modal__button}>Далее</button>
