@@ -47,7 +47,7 @@ const Constructor = () => {
                     />
                 </div>
             </Col>
-            <Col>
+            <Col lg={6}>
                 <Preview />
             </Col>
         </Row>

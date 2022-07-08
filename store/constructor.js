@@ -97,30 +97,30 @@ class Constructor {
             name: 'search',
             title: 'Поиск по сайту',
         },
-        {
-            name: 'multi-language',
-            title: 'Мультиязычность',
-        },
+        // {
+        //     name: 'multi-language',
+        //     title: 'Мультиязычность',
+        // },
         {
             name: 'hide-watermark',
             title: 'Убрать значок “Сделано с помощью Inshop”',
         },
-        {
-            name: 'wishlist',
-            title: 'Избранное',
-        },
-        {
-            name: 'chat',
-            title: 'Онлайн чат',
-        },
-        {
-            name: 'themes',
-            title: 'Светлый и темный режим',
-        },
-        {
-            name: 'delivery',
-            title: 'Доставки',
-        },
+        // {
+        //     name: 'wishlist',
+        //     title: 'Избранное',
+        // },
+        // {
+        //     name: 'chat',
+        //     title: 'Онлайн чат',
+        // },
+        // {
+        //     name: 'themes',
+        //     title: 'Светлый и темный режим',
+        // },
+        // {
+        //     name: 'delivery',
+        //     title: 'Доставки',
+        // },
     ]
 
     constructor() {

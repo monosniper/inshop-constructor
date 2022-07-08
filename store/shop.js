@@ -22,6 +22,10 @@ class Shop {
         this.options.slogan = slogan;
     }
 
+    setLanguage(language) {
+        this.options.language = language;
+    }
+
     setDomain(domain) {
         this.domain = domain;
     }

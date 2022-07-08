@@ -12,19 +12,33 @@ const General = () => {
     const [files, setFiles] = useState([])
     const [title, setTitle] = useState(shop.options.title)
     const [slogan, setSlogan] = useState(shop.options.slogan)
+    const [language, setLanguage] = useState(shop.options.language)
+    const languages = [
+        {
+            title: 'Русский',
+            value: 'ru',
+        },
+        {
+            title: 'Английский',
+            value: 'en',
+        },
+    ]
 
     useEffect(() => {
         shop.setTitle(title)
         shop.setSlogan(slogan)
-    }, [title, slogan])
+        shop.setLanguage(language)
+    }, [title, slogan, language])
 
     useEffect(() => {
         if(shop.options) {
             setTitle(shop.options.title)
             setSlogan(shop.options.slogan)
+            setLanguage(shop.options.language)
         } else {
             setTitle('')
             setSlogan('')
+            setLanguage('ru')
         }
     }, [shop.options])
 
@@ -34,6 +48,9 @@ const General = () => {
         <>
             <input onChange={(e) => setTitle(e.target.value)} value={title} placeholder={'Название...'} type="text" className={styles.constructor__field} />
             <input onChange={(e) => setSlogan(e.target.value)} value={slogan} placeholder={'Слоган...'} type="text" className={styles.constructor__field} />
+            <select onChange={(e) => setLanguage(e.target.value)} value={language} className={styles.constructor__field}>
+                {languages.map((lang, i) => <option value={lang.value} key={'lang-'+i}>{lang.title}</option>)}
+            </select>
             <FilePond
                 files={files}
                 onupdatefiles={setFiles}
